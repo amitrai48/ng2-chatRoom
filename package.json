@@ -1,0 +1,34 @@
+{
+  "name": "ng2-chatRoom",
+  "version": "1.0.0",
+  "main": "server/server.js",
+  "scripts": {
+    "pretest": "jshint ."
+  },
+  "dependencies": {
+    "angular2": "^2.0.0-beta.0",
+    "compression": "^1.0.3",
+    "cors": "^2.5.2",
+    "es6-promise": "^3.0.2",
+    "es6-shim": "^0.34.0",
+    "loopback": "^2.22.0",
+    "loopback-boot": "^2.6.5",
+    "loopback-component-explorer": "^2.1.0",
+    "loopback-connector-mongodb": "^1.13.2",
+    "loopback-datasource-juggler": "^2.39.0",
+    "reflect-metadata": "^0.1.2",
+    "rxjs": "^5.0.0-beta.0",
+    "serve-favicon": "^2.0.1",
+    "systemjs": "^0.19.9",
+    "zone.js": "^0.5.10",
+    "socket.io": "^1.3.7"
+  },
+  "devDependencies": {
+    "jshint": "^2.5.6"
+  },
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "description": "ng2-chatRoom"
+}

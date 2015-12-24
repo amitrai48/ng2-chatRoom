@@ -1,0 +1,54 @@
+.login .login-content , .register .register-content, .no-room .room-card{
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 35px 55px 35px;
+    overflow: visible;
+    margin-top: 10%;
+}
+
+ header, main, footer {
+      padding-left: 240px;
+    }
+
+    @media only screen and (max-width : 992px) {
+      header, main, footer {
+        padding-left: 0;
+      }
+    }
+
+main{
+  height: 100%;
+}
+
+main .container{
+  height: 100%;
+}
+
+main .container .messages{
+  height: 75%;
+  overflow: hidden;
+}
+
+main .container .messages:hover{
+  overflow-y:auto;
+}
+
+html,body{
+  height:100%;
+}
+
+.room.selected{
+  background-color: #4DB6AC;
+}
+
+.room.selected a{
+  color:#FFF;
+}
+
+.input-msg .input-field .send{
+  right: -50px;
+      border: none;
+    background-color: transparent;
+}
+
