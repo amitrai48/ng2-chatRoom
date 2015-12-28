@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "bower install",
     "tsc": "tsc",
-    "prestart":"tsc",
+    "prestart": "tsc",
     "start": "node ."
   },
   "engines": {
@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "angular2": "^2.0.0-beta.0",
+    "bower": "^1.7.1",
     "compression": "^1.0.3",
     "cors": "^2.5.2",
     "es6-promise": "^3.0.2",
