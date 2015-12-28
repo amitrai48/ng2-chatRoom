@@ -174,6 +174,7 @@ export class HomeComponent implements OnInit{
 		this.getRooms();
 		var _this = this;
 		this.socket.on('message', function(msg) {
+			console.log(msg);
 			_this.messages.push(msg);
 			console.log($(".messages")[0].scrollHeight);
 			setTimeout(function() {
