@@ -1,0 +1,29 @@
+{
+  "name": "ng2-chatRoom",
+  "description": "ng2-chatRoom",
+  "main": "server/server.js",
+  "authors": [
+    "amitrai48@gmail.com"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "ng2",
+    "loopback",
+    "materialize"
+  ],
+  "moduleType": [
+    "es6"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Materialize": "materialize#~0.97.5"
+  }
+}

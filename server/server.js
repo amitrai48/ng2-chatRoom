@@ -24,20 +24,54 @@ boot(app, __dirname, function(err) {
   // start the server if `$ node server.js`
   if (require.main === module){
     //app.start();
+  app.locals.onlineUsers = 0;
   app.io = require('socket.io')(app.start());
   app.io.on('connection',function(socket){
     console.log('a user connected');
-    app.io.emit('count',{allCount:app.io.engine.clientsCount});
+    app.locals.onlineUsers++;
+    app.models.Room.find({},function(err,data){
+      if(data){
+        var temp = {};
+        for(var i= 0;i<data.length;i++){
+          if(app.io.sockets.adapter.rooms[data[i].id])
+            temp[data[i].id]=Object.keys(app.io.sockets.adapter.rooms[data[i].id]).length;
+        }
+        app.locals.roomCounts = temp;
+      }
+      app.io.emit('count',{allCount:app.locals.onlineUsers,roomCounts:app.locals.roomCounts});
+    });
+    
     socket.on('subscribe',function(room){
-      console.log('joining room',room.id);
-      socket.join(room.id);
-
+      console.log(room);
+      console.log('joining room',room.newRoom.id);
+      if(room.oldRoom){
+        socket.leave(room.oldRoom.id);
+        app.io.to(room.oldRoom.id).emit('room info',room.user.email + ' has left the room ');
+        if(app.io.sockets.adapter.rooms[room.oldRoom.id])
+          app.locals.roomCounts[room.oldRoom.id] = Object.keys(app.io.sockets.adapter.rooms[room.oldRoom.id]).length;
+        else
+          app.locals.roomCounts[room.oldRoom.id] = 0;
+      }
+      socket.join(room.newRoom.id);
+      app.locals.roomCounts[room.newRoom.id] = Object.keys(app.io.sockets.adapter.rooms[room.newRoom.id]).length;
+      app.io.emit('count',{allCount:app.locals.onlineUsers,roomCounts:app.locals.roomCounts});
+      app.io.to(room.newRoom.id).emit('room info',room.user.email + ' has joined the room ');
     });
 
     socket.on('disconnect',function(){
       console.log("user disconnected");
-      socket.disconnect();
-      app.io.emit('count',{allCount:app.io.engine.clientsCount});
+      app.locals.onlineUsers--;
+      app.models.Room.find({},function(err,data){
+      if(data){
+        var temp = {};
+        for(var i= 0;i<data.length;i++){
+          if(app.io.sockets.adapter.rooms[data[i].id])
+            temp[data[i].id]=Object.keys(app.io.sockets.adapter.rooms[data[i].id]).length;
+        }
+        app.locals.roomCounts = temp;
+      }
+      app.io.emit('count',{allCount:app.locals.onlineUsers,roomCounts:app.locals.roomCounts});
+    });
     });
   });
 }
