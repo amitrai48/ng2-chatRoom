@@ -4,8 +4,6 @@
   "main": "server/server.js",
   "scripts": {
     "postinstall": "bower install",
-    "tsc": "tsc",
-    "prestart": "tsc",
     "start": "node ."
   },
   "engines": {

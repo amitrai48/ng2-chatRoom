@@ -1,1 +1,1 @@
-web: npm start --force 
+web: slc run
